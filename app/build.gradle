@@ -31,6 +31,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+//    productFlavors {
+//        free {
+//            applicationId com.magarex.builditbigger.free
+//        }
+//
+//        paid {
+//            applicationId com.magarex.builditbigger.paid
+//        }
+//    }
 }
 
 dependencies {
@@ -41,8 +51,9 @@ dependencies {
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
 
-    implementation project(':joke-provider')
     implementation project(':joke-teller')
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
