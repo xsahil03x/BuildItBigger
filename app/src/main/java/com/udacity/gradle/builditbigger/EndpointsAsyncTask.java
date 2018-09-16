@@ -28,9 +28,8 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
-        }
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+
     }
 
     @SafeVarargs
@@ -52,7 +51,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
     @Override
     protected void onPostExecute(String result) {
-        progressBar.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
         Intent intent = new Intent(context, JokeActivity.class);
         intent.putExtra(Intent.EXTRA_TEXT, result);
         context.startActivity(intent);
