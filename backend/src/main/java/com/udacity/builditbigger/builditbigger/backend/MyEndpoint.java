@@ -21,7 +21,7 @@ import javax.inject.Named;
 )
 public class MyEndpoint {
 
-    @ApiMethod(name = "joke", httpMethod = ApiMethod.HttpMethod.GET)
+    @ApiMethod(name = "getJoke")
     public Joke getJoke() {
         Joke joke = new Joke();
         joke.setJoke(JokeProvider.getRandomJoke());
