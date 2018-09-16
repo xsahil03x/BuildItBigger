@@ -8,12 +8,15 @@ import java.util.concurrent.ExecutionException;
 
 public class AsyncNonNullTest extends AndroidTestCase {
 
-
-    // Please comment the onPostExecute method for a successful test
     public void test() {
 
         String result;
-        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(getContext(), null);
+        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(getContext(), null) {
+            @Override
+            protected void onPostExecute(String result) {
+                // Overriding onPostExecute
+            }
+        };
         endpointsAsyncTask.execute();
         try {
             result = endpointsAsyncTask.get();
