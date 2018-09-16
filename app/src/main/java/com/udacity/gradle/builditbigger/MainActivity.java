@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.magarex.joketeller.JokeActivity;
@@ -23,14 +24,19 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private String joke;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     private void fetchJoke() {
+
+        progressBar.setVisibility(View.VISIBLE);
+
         RetrofitBuilder.getClient().create(JokeApi.class)
                 .getJoke()
                 .enqueue(new Callback<String>() {
@@ -40,18 +46,22 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(response.body());
                                 joke = jsonObject.getString("joke");
+                                progressBar.setVisibility(View.GONE);
                                 navigateToJokeTeller();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        } else
+                        } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(MainActivity.this,
                                     "Oops, Check your network connection",
                                     Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(MainActivity.this,
                                 "Oops, Check your network connection",
                                 Toast.LENGTH_SHORT).show();
