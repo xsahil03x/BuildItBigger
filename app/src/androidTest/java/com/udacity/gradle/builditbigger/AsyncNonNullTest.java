@@ -27,18 +27,6 @@ public class AsyncNonNullTest extends AndroidTestCase {
         }
 
         final String finalResult = result;
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        assertNotNull(finalResult);
-                    }
-                }, 10000);
-            }
-        }).run();
+        assertNotNull(finalResult);
     }
 }
